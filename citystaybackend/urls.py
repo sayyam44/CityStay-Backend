@@ -1,0 +1,39 @@
+from django.contrib import admin
+from django.urls import path,include
+from listings.api import views as listings_api_views
+from users.api import views as users_api_views
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    
+    #here used .as_view() because in api->views.py I have made class based views
+    # for listing the list of accomodations on frontend
+    path('api/listings/',listings_api_views.ListingList.as_view()),
+
+    # for creating a new listing from the frontend for Addproperty.js
+    path('api/listings/create/',listings_api_views.ListingCreate.as_view()),
+    
+    # To list the userprofiles that are created using django signals 
+    # automatically as the user signs up
+    path('api/profiles/',users_api_views.ProfileList.as_view()),
+
+    # int:pk-> getting a single profile for the user with profile id as 
+    # primary key as same as the seller id as we need to get the
+    # profile on the basis of seller id and not profile id .
+    path('api/profiles/<int:seller>/',users_api_views.ProfileDetail.as_view()),
+
+    # this is to update the profile 
+    path('api/profiles/<int:seller>/update/',users_api_views.ProfileUpdate.as_view()),
+
+    #below 2 urls will be accessed for user registeration or authentication
+    path('api-auth-djoser/', include('djoser.urls')),
+    path('api-auth-djoser/', include('djoser.urls.authtoken')),
+
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+
+
