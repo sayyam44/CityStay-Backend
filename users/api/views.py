@@ -1,8 +1,8 @@
 from users.models import Profile
 from .serializers import ProfileSerailizer
 from rest_framework import generics
-# The urls for the below functions are defined in urls.py file
-
+# The urls for the below functions are defined in urls.py filee
+#new
 # To list the userprofiles that are created using django signals 
 # automatically as the user signs up
 class ProfileList(generics.ListAPIView):
