@@ -10,7 +10,10 @@ class User(AbstractUser):
 # to get the custom user model eg in users->admin.py and listings->models.py
 
 class Profile(models.Model):
-    #seller field is the user of this profile
+    #seller field is the userid of this profile
+    # we will access the profile/agency in the basis of this
+    # seller(user) id not on the basis of the profile id
+    # that logic is written in urls.py file
     seller = models.OneToOneField(User, on_delete=models.CASCADE)
     agency_name = models.CharField(max_length=100, null=True, blank=True)
     phone_number = models.CharField(max_length=25, null=True, blank=True)

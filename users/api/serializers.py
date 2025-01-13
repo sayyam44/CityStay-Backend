@@ -10,8 +10,9 @@ from listings.api.serializers import ListingSerializer
 # to serialize the profile models into the readable format
 class ProfileSerailizer(serializers.ModelSerializer):
 
-   #this is to get each listing of the seller along with the 
-   # profile model using the listing model and then serializing it
+   #this is to add a column in the profiles models to get all the
+   # listings of the particular seller along with 
+   # the profile model using the listing model and then serializing it
     seller_listings = serializers.SerializerMethodField()
     def get_seller_listings(self,obj):
         query = Listing.objects.filter(seller=obj.seller); #this holds all the listings of the current seller
