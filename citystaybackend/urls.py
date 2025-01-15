@@ -16,6 +16,9 @@ urlpatterns = [
     # for creating a new listing from the frontend for Addproperty.js
     path('api/listings/create/',listings_api_views.ListingCreate.as_view()),
     
+    # for showing the detail of each listing
+    path('api/listings/<int:pk>/',listings_api_views.ListingDetail.as_view()),
+
     # To list the userprofiles that are created using django signals 
     # automatically as the user signs up
     path('api/profiles/',users_api_views.ProfileList.as_view()),

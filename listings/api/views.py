@@ -8,7 +8,7 @@ from rest_framework import generics
 # system.
 # The urls for the below functions are defined in urls.py file
 
-# to list the listing 
+# to show all the listings 
 class ListingList(generics.ListAPIView):
     queryset=Listing.objects.all().order_by('-date_posted')
     serializer_class = ListingSerializer
@@ -18,3 +18,7 @@ class ListingCreate(generics.CreateAPIView):
     queryset=Listing.objects.all()
     serializer_class = ListingSerializer
 
+# to get the detail of each listing 
+class ListingDetail(generics.RetrieveAPIView):
+    queryset=Listing.objects.all()
+    serializer_class = ListingSerializer
