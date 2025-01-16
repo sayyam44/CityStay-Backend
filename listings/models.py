@@ -6,6 +6,7 @@ from django.contrib.gis.geos import Point
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
+#model for lisitngs
 class Listing(models.Model):
     seller= models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
     title = models.CharField(max_length=150)
@@ -53,7 +54,28 @@ class Listing(models.Model):
     picture3= models.ImageField(blank=True,null=True,upload_to="pictures/%Y/%m/%d/")
     picture4= models.ImageField(blank=True,null=True,upload_to="pictures/%Y/%m/%d/")
     picture5= models.ImageField(blank=True,null=True,upload_to="pictures/%Y/%m/%d/")
-
+    
+    # for returning the value of the title field as the string
     def __str__(self):
         return self.title    
-    
+
+#model for point of interest 
+class Poi(models.Model):
+    name = models.CharField(max_length=120, blank=True)
+    choices_type=(
+        ('University', 'University'),
+        ('Hospital', 'Hospital'),
+        ('Stadium', 'Stadium'),
+        ('Mall','Mall'),
+        ('College','College'),
+    )
+    type = models.CharField(max_length=50, choices=choices_type)
+
+    #since we need to apply the distance fiters so that is why 
+    #we cannot use latitute, logintude seperately we used PointField
+    # To save latitude,longitude in location array we use forms.py
+    location = models.PointField(blank=True, null=True,srid=4326)
+
+    # for returning the value of the name field as the string
+    def __str__(self):
+        return self.name 
