@@ -19,6 +19,9 @@ urlpatterns = [
     # for showing the detail of each listing
     path('api/listings/<int:pk>/',listings_api_views.ListingDetail.as_view()),
 
+    # for deleting the current listing
+    path('api/listings/<int:pk>/delete/',listings_api_views.ListingDelete.as_view()),
+
     # To list the userprofiles that are created using django signals 
     # automatically as the user signs up
     path('api/profiles/',users_api_views.ProfileList.as_view()),

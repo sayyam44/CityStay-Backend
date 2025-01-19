@@ -22,3 +22,8 @@ class ListingCreate(generics.CreateAPIView):
 class ListingDetail(generics.RetrieveAPIView):
     queryset=Listing.objects.all()
     serializer_class = ListingSerializer
+
+# to delete the current listing used in listingdetail.js
+class ListingDelete(generics.DestroyAPIView):
+    queryset=Listing.objects.all()
+    serializer_class = ListingSerializer
