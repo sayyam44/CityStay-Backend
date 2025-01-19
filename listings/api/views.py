@@ -27,3 +27,8 @@ class ListingDetail(generics.RetrieveAPIView):
 class ListingDelete(generics.DestroyAPIView):
     queryset=Listing.objects.all()
     serializer_class = ListingSerializer
+
+#to update the current listing 
+class ListingUpdate(generics.UpdateAPIView):
+    queryset=Listing.objects.all()
+    serializer_class = ListingSerializer
