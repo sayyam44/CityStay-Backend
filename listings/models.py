@@ -79,3 +79,15 @@ class Poi(models.Model):
     # for returning the value of the name field as the string
     def __str__(self):
         return self.name 
+
+
+class Review(models.Model):
+    listing = models.ForeignKey('Listing', on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # THIS IS TO ADD A RATING FROM 0 TO 5 STARS.
+    rating = models.PositiveIntegerField(choices=[(i, str(i)) for i in range(0, 6)], default=5)  # Rating from 1 to 5
+    review = models.TextField(null=True, blank=True)
+    date_posted = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f'Review for {self.listing.title} by {self.user.username}'
