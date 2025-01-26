@@ -25,6 +25,10 @@ urlpatterns = [
     # for updating the current listing
     path('api/listings/<int:pk>/update/',listings_api_views.ListingUpdate.as_view()),
 
+    # URL to add a review to a listing
+    # path('api/listings/<int:pk>/add_review/', listings_api_views.AddReview.as_view()),
+    # path('api/listings/<int:pk>/add_review/', listings_api_views.AddReview.as_view(), name='add_review'),
+    path('api/listings/<int:pk>/add_review/', listings_api_views.AddReview.as_view(), name='add_review'),
     # To list the userprofiles that are created using django signals 
     # automatically as the user signs up
     path('api/profiles/',users_api_views.ProfileList.as_view()),
@@ -36,7 +40,7 @@ urlpatterns = [
 
     # this is to update the profile 
     path('api/profiles/<int:seller>/update/',users_api_views.ProfileUpdate.as_view()),
-
+    
     #below 2 urls will be accessed for user registeration or authentication
     path('api-auth-djoser/', include('djoser.urls')),
     path('api-auth-djoser/', include('djoser.urls.authtoken')),

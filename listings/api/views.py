@@ -1,6 +1,10 @@
-from .serializers import ListingSerializer
-from listings.models import Listing
+from .serializers import ListingSerializer,ReviewSerializer
+from listings.models import Listing,Review
 from rest_framework import generics
+
+from rest_framework.exceptions import ValidationError
+from django.contrib.auth import get_user_model
+User = get_user_model()
 # generics are a set of pre-built views that provide common patterns 
 # for building APIs, such as creating, retrieving, updating, and
 # deleting resources. They allow you to handle CRUD operations with 
@@ -32,3 +36,20 @@ class ListingDelete(generics.DestroyAPIView):
 class ListingUpdate(generics.UpdateAPIView):
     queryset=Listing.objects.all()
     serializer_class = ListingSerializer
+
+
+class AddReview(generics.CreateAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+    def perform_create(self, serializer):
+        listing_id = self.request.data.get('listing_id')
+        user_id = self.request.data.get('user_id')
+
+        try:
+            listing = Listing.objects.get(id=listing_id)
+            user = User.objects.get(id=user_id)
+        except (Listing.DoesNotExist, User.DoesNotExist):
+            raise ValidationError({"error": "Invalid listing_id or user_id"})
+
+        serializer.save(listing=listing, user=user)

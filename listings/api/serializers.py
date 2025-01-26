@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from listings.models import Listing,Poi
+from listings.models import Listing,Poi,Review
 # using GeoDjango library to filter the pois upto 2km for each listing
 from django.contrib.gis.measure import D  # ``D`` is a shortcut for ``Distance``
 from django.contrib.gis.geos import Point
@@ -13,6 +13,8 @@ class ListingSerializer(serializers.ModelSerializer):
     seller_agency_name=serializers.SerializerMethodField()
     # for having the all pois for each listing within 2kms
     listing_pois_within_2km=serializers.SerializerMethodField()
+    # for having all the reviews for each listing
+    reviews = serializers.SerializerMethodField() 
 
     # this is to get all the pois for a listing within 2kms
     def get_listing_pois_within_2km(self,obj):
@@ -25,6 +27,12 @@ class ListingSerializer(serializers.ModelSerializer):
         query = Poi.objects.filter(location__distance_lte=(listing_location,D(km=2))) 
         query_serialized=PoiSerializer(query,many=True)
         return query_serialized.data
+    
+    # Fetch all reviews related to the listing
+    def get_reviews(self, obj):
+        reviews = obj.reviews.all() 
+        review_serializer = ReviewSerializer(reviews, many=True)
+        return review_serializer.data
 
     #this is to serialize the models for the username of each listing
     def get_seller_username(self,obj):
@@ -46,3 +54,11 @@ class PoiSerializer(serializers.ModelSerializer):
     class Meta:
         model=Poi
         fields='__all__'
+
+# Serializing the Review model by adding the review_username field
+class ReviewSerializer(serializers.ModelSerializer):
+    review_username = serializers.CharField(source='user.username', read_only=True)  # Display username of the reviewer
+
+    class Meta:
+        model = Review
+        fields = ['id', 'review', 'rating', 'date_posted', 'user', 'review_username', 'listing']
