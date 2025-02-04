@@ -27,6 +27,13 @@ class ProfileUpdate(generics.UpdateAPIView):
 
 # this is to list all the messages of the current user 
 class MessageList(generics.ListAPIView):
+    serializer_class = MessageSerializer
+    # Extract recipient ID from the URL
+    def get_queryset(self):
+        recipient_id = self.kwargs.get("recipient_id")  
+        return Message.objects.filter(recipient=recipient_id)
+
+#this is to send the message and then serialize it 
+class send_message(generics.CreateAPIView):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
-# The urls for the functions are defined in urls.py file
