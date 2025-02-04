@@ -1,5 +1,5 @@
-from users.models import Profile
-from .serializers import ProfileSerailizer
+from users.models import Profile, Message
+from .serializers import ProfileSerailizer,MessageSerializer
 from rest_framework import generics
 # The urls for the below functions are defined in urls.py file
 
@@ -25,4 +25,8 @@ class ProfileUpdate(generics.UpdateAPIView):
     serializer_class = ProfileSerailizer
     lookup_field='seller'
 
+# this is to list all the messages of the current user 
+class MessageList(generics.ListAPIView):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
 # The urls for the functions are defined in urls.py file

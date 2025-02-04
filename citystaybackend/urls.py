@@ -41,6 +41,10 @@ urlpatterns = [
     # this is to update the profile 
     path('api/profiles/<int:seller>/update/',users_api_views.ProfileUpdate.as_view()),
     
+    # this is to get the messages of the current user
+    path('api/profiles/<int:seller>/messages/',users_api_views.MessageList.as_view()),
+
+
     #below 2 urls will be accessed for user registeration or authentication
     path('api-auth-djoser/', include('djoser.urls')),
     path('api-auth-djoser/', include('djoser.urls.authtoken')),

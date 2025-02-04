@@ -61,4 +61,5 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        fields = ['id', 'review', 'rating', 'date_posted', 'user', 'review_username', 'listing']
+        # fields='__all__'
+        fields = ['date_posted','id','listing','rating', 'review','user','review_username']
