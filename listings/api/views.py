@@ -39,17 +39,17 @@ class ListingUpdate(generics.UpdateAPIView):
 
 
 class AddReview(generics.CreateAPIView):
-    queryset = Review.objects.all()
+    queryset = Review.objects.all().order_by('-date_posted')
     serializer_class = ReviewSerializer
 
-    def perform_create(self, serializer):
-        listing_id = self.request.data.get('listing_id')
-        user_id = self.request.data.get('user_id')
+    # def perform_create(self, serializer):
+    #     # listing_id = self.request.data.get('listing_id')
+    #     user_id = self.request.data.get('user_id')
 
-        try:
-            listing = Listing.objects.get(id=listing_id)
-            user = User.objects.get(id=user_id)
-        except (Listing.DoesNotExist, User.DoesNotExist):
-            raise ValidationError({"error": "Invalid listing_id or user_id"})
+    #     try:
+    #         # listing = Listing.objects.get(id=listing_id)
+    #         user = User.objects.get(id=user_id)
+    #     except (Listing.DoesNotExist, User.DoesNotExist):
+    #         raise ValidationError({"error": "Invalid listing_id or user_id"})
 
-        serializer.save(listing=listing, user=user)
+    #     serializer.save(user=user)
