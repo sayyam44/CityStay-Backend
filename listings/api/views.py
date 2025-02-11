@@ -1,7 +1,6 @@
 from .serializers import ListingSerializer,ReviewSerializer
 from listings.models import Listing,Review
 from rest_framework import generics
-
 from rest_framework.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -16,7 +15,7 @@ User = get_user_model()
 class ListingList(generics.ListAPIView):
     queryset=Listing.objects.all().order_by('-date_posted')
     serializer_class = ListingSerializer
-
+ 
 # to create a new listing from frontend from AddProperty.js 
 class ListingCreate(generics.CreateAPIView):
     queryset=Listing.objects.all()
