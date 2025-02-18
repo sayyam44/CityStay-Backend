@@ -14,10 +14,15 @@ class ProfileSerailizer(serializers.ModelSerializer):
    # listings of the particular seller along with 
    # the profile model using the listing model and then serializing it
     seller_listings = serializers.SerializerMethodField()
+    seller_username = serializers.SerializerMethodField() 
     def get_seller_listings(self,obj):
         query = Listing.objects.filter(seller=obj.seller); #this holds all the listings of the current seller
         listings_serialized=ListingSerializer(query, many=True) #this serialized the listing model
         return listings_serialized.data
+    
+    #this is to serialize the models for the username of each listing
+    def get_seller_username(self,obj):
+        return obj.seller.username
     
     class Meta:#this holds all the data of the profile in models.py
         model=Profile
