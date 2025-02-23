@@ -37,3 +37,17 @@ class MessageList(generics.ListAPIView):
 class send_message(generics.CreateAPIView):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
+
+# to delete the message
+class MessageDelete(generics.DestroyAPIView):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+    lookup_field = "id"  # Not needed since we're overriding get_object
+
+    def get_object(self):
+        # get_queryset() returns a filtered queryset instead of a single object.
+        # DestroyAPIView expects a single object to delete, but get_queryset() returns a list of objects (queryset)
+        recipient_id = self.kwargs.get("recipient_id")
+        message_id = self.kwargs.get("message_id")
+
+        return Message.objects.get(id=message_id, recipient_id=recipient_id)
