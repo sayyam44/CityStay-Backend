@@ -47,6 +47,9 @@ urlpatterns = [
     # this is to send the message to listing owner
     path('api/messages/send/', users_api_views.send_message.as_view()),
 
+    # for deleting the current message
+    path('api/profiles/<int:recipient_id>/messages/<int:message_id>/',users_api_views.MessageDelete.as_view()),
+
     #below 2 urls will be accessed for user registeration or authentication
     path('api-auth-djoser/', include('djoser.urls')),
     path('api-auth-djoser/', include('djoser.urls.authtoken')),
