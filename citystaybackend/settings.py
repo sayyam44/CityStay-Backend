@@ -162,3 +162,10 @@ DJOSER = {
     'USER_CREATE_PASSWORD_RETYPE' : True,
     'SEND_ACTIVATION_EMAIL' : False,
 }
+
+# If a filename .server_settings exists in this folder then 
+# import everything from it .
+try:
+    from .server_settings import *
+except ImportError:
+    pass
