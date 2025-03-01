@@ -96,7 +96,7 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'city_stay_db',
         'USER': 'postgres',
-        'PASSWORD': 'Amritsar123#',
+        'PASSWORD': '#########',
         'HOST': 'localhost',
         'PORT': '5434'
     }
