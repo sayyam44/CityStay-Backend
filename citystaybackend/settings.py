@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'corsheaders',  #for cross-origin requests
     'djoser', #for user registeration, suthentication etc.
     'rest_framework.authtoken', #djoser simple token authentication system
+    'storages',
 
     'listings.apps.ListingsConfig',
     'users.apps.UsersConfig',
