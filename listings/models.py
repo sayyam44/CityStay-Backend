@@ -15,7 +15,7 @@ def compress(picture):
     if picture:
         pic=PIL.Image.open(picture)
         buf=BytesIO()
-        pic.save(buf, 'JPEG', quality=35)
+        pic.save(buf, 'JPEG', quality=60)
         new_pic=File(buf,name=picture.name)
         return new_pic
     else:
