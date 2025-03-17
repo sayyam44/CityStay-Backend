@@ -65,8 +65,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'citystaybackend.urls'
@@ -98,7 +96,7 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'city_stay_db',
         'USER': 'postgres',
-        'PASSWORD': '#######',
+        'PASSWORD': '#########',
         'HOST': 'localhost',
         'PORT': '5434'
     }
@@ -162,7 +160,6 @@ REST_FRAMEWORK = {
 
 DJOSER = {
     'USER_CREATE_PASSWORD_RETYPE' : True,
-    'SEND_ACTIVATION_EMAIL' : False,
 }
 
 # If a filename .server_settings exists in this folder then 
