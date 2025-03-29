@@ -163,6 +163,7 @@ DJOSER = {
     'USER_CREATE_PASSWORD_RETYPE' : True,
 }
 
+
 # If a filename .server_settings exists in this folder then 
 # import everything from it .
 try:
