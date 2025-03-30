@@ -3,7 +3,7 @@ from .serializers import ProfileSerailizer,MessageSerializer
 from rest_framework import generics
 # The urls for the below functions are defined in urls.py file
 
-# To list the userprofiles that are created using django signals 
+# To list of the userprofiles that are created using django signals 
 # automatically as the user signs up
 class ProfileList(generics.ListAPIView):
     queryset = Profile.objects.all()
@@ -18,7 +18,7 @@ class ProfileDetail(generics.RetrieveAPIView):
     # though the seller id and profile id is different but here we 
     # access the profile based on the seller id
 
-# this is if the user wants to update its profile
+# this is if this user wants to update its profile
 # using the patch request in profile.js
 class ProfileUpdate(generics.UpdateAPIView):
     queryset = Profile.objects.all()

@@ -16,7 +16,7 @@ class ListingList(generics.ListAPIView):
     queryset=Listing.objects.all().order_by('-date_posted')
     serializer_class = ListingSerializer
  
-# to create a new listing from frontend from AddProperty.js 
+# to create a newest listing from frontend from AddProperty.js 
 class ListingCreate(generics.CreateAPIView):
     queryset=Listing.objects.all()
     serializer_class = ListingSerializer
