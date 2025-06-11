@@ -1,0 +1,14 @@
+Django>=4.0
+djangorestframework>=3.13
+django-cors-headers>=3.13
+django-storages>=1.13
+djoser>=2.1.0
+gunicorn>=20.1.0              
+whitenoise>=6.4             
+drf-yasg>=1.20.0             
+python-dotenv>=1.0.0         
+Pillow>=9.0.0
+psycopg2-binary>=2.9
+boto3>=1.26
+djangorestframework-gis>=0.18
+
