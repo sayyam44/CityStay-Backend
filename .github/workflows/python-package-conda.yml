@@ -32,3 +32,29 @@ jobs:
       run: |
         conda install pytest
         pytest
+    
+  deploy:
+    name: Deploy to DigitalOcean
+    needs: build-linux
+    runs-on: ubuntu-latest
+    if: success() #if the workflow has been success till now
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup SSH #connecting to the remote DigitalOcean server using SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.DIGITALOCEAN_IP }} >> ~/.ssh/known_hosts
+
+    - name: Deploy changes to DigitalOcean #Finaly deploying the new changes on digitalocean
+      run: |
+        ssh -i ~/.ssh/id_rsa ${{ secrets.DIGITALOCEAN_USER }}@${{ secrets.DIGITALOCEAN_IP }} << 'EOF'
+          cd ~/citystay_project
+          source citystayenv/bin/activate
+          git pull origin main
+          echo "Deployment successful!"
+        
